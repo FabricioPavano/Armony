@@ -1,80 +1,109 @@
 source 'https://rubygems.org'
-ruby '2.5.1'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'rake', '~> 10.3'
-gem 'rails', '5.2.3'
-gem 'american_date'
-gem 'redis-rails', '>= 5.0.2'
-gem 'redis-store', '~> 1.6.0'
+ruby '2.6.5'
 
-gem 'sass-rails',   '~> 5.0.7'
-gem 'sprockets-rails'
-gem 'coffee-rails', '~> 4.2.2'
-gem 'uglifier', '>= 1.0.3'
+gem 'rails', '~> 5.2.3'
+gem 'pg', '0.20.0'
+gem 'pg_search'
+gem 'rack-cors'
+gem 'puma', '~> 3.11'
+gem 'state_machines', '~> 0.5.0'
+gem 'state_machines-activerecord', "~> 0.6.0"
+gem 'bootsnap', '>= 1.1.0', require: false
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'devise'
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+gem 'acts_as_paranoid'
+gem 'acts_as_list','0.9.15'
+gem "logidze"
+gem "auto_strip_attributes", "~> 2.6"
+gem 'liquid'
 
-gem 'jquery-rails'
-gem 'pdf-reader'
-gem 'will_paginate', '~> 3.1.0'
-gem 'RedCloth', '~> 4.2.9'
-gem 'acts_as_paranoid', '~> 0.6.0'
-gem "devise", "~> 4.6"
-gem "cancancan", ">= 1.6.9"
-gem "rolify", ">= 3.2.0"
-gem "pdfkit", "~> 0.8.4"
-gem "wkhtmltopdf-binary", "~> 0.12.5.4"
-gem 'rinku'
-gem 'oauth2'
+gem 'painless_manufacturing',
+  # path: "/Users/vic/projects/painless_manufacturing/painless_manufacturing"
+  git: "https://github.com/parablesoft/painless_manufacturing.git",
+  branch: "feature/crm-mods"
+# ref: "a1dea6c"
+# tag: "v0.1.13"
 
-gem "jquery-minicolors-rails"
-gem "simple_form", ">= 2.1.0"
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
+gem "mail_view", "~> 2.0.4"
 
-gem "nested_form"
+gem 'stardust_rails', require: 'stardust',
+  git: "https://github.com/parablesoft/stardust_rails.git",
+  branch: "master"
 
-gem 'mysql2', '~> 0.5.2'
-gem "audited", "~> 4.8.0"
-gem 'kaminari'
-gem 'activerecord-import'
-
-gem 'aws-sdk-s3', require: false
+gem 'stardust_rails-reports',
+  git: "https://github.com/parablesoft/stardust_rails-reports.git",
+  branch: "master",
+  ref: "d6b1d0e8cea823a4117bd8e730e039207599058b"
+  # path: "/Users/vic/projects/stardust/stardust_rails-reports"
 
 group :development, :test do
-  gem 'byebug', platform: :mri
-  gem "capybara", "~> 3.29"
-  gem "database_cleaner", "~> 1.7.0"
-  gem "dotenv-rails", "~> 2.7"
-  gem "factory_bot_rails", "~> 5.0"
-  gem "faker", "~> 2.2.2"
-  gem "rspec-rails", "~> 3.8"
-  gem "scout_apm", "~> 2.6"
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
+  gem "ffaker"
+  gem "awesome_print"
+  gem 'spring-commands-rspec'
+  gem 'factory_bot_rails'
+  gem 'wkhtmltopdf-binary-edge', '~> 0.12.5.0'
+end
+gem 'wicked_pdf'
+
+group :production do
+  gem 'wkhtmltopdf-binary-edge-alpine', '~> 0.12.5.0'
 end
 
 group :test do
-  gem "timecop", "~> 0.9.1"
+  gem 'shoulda-matchers', require: false
+  gem 'stardust-rspec',
+    git: "https://github.com/parablesoft/stardust-rspec.git",
+    tag: "v0.1.1"
+  gem 'timecop'
+
 end
 
-gem 'geocoder'
-gem "forecast_io" # api key c4607411117d78c40c70d08ee36d3e5e
+group :development do
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'dotenv-rails'
+end
 
-# MJE no reference causing deploy error gem 'rubyzip'
-gem 'rollbar', '~> 2.16' #<< update application.html.erb with JS snipit when upgrading https://docs.rollbar.com/v1.0.0/docs/browser-js
+# gem 'geocoder'
+gem 'my_zipcode_gem', 
+  git: "https://github.com/victornamuso/my_zipcode_gem",
+  branch: "develop"
 
-gem "listen", "~> 3.2"
-gem 'procore'
-gem "webpacker", "~> 4.0"
-gem "jbuilder", "~> 2.9"
-gem "pretender", "~> 0.3.4"
-gem "puma", "~> 4.0"
-gem "after_party", "~> 1.11"
-gem "seed-fu", "~> 2.3"
-gem "graphql", "~> 1.9.15"
+gem 'mocha', group: :test
 
-gem "rack-attack", "~> 6.2"
 
-gem "mini_magick", "~> 4.10"
+gem 'stardust-hooks', 
+  # path: "/Users/vic/projects/stardust/stardust-hooks"
+  git: "https://github.com/parablesoft/stardust-hooks.git",
+  branch: "feature/enhancements"
+#
+gem 'authorizenet'
+gem 'zester'
+gem 'google-protobuf', '3.9.2'
+gem 'memoist', '0.16.0'
+gem 'google-api-client', '~> 0.34'
 
-gem 'actiontext', git: 'https://github.com/kobaltz/actiontext.git', branch: 'archive', require:'action_text'
-gem 'image_processing'
+gem 'carrierwave', '2.0.0.rc'
+gem 'carrierwave-aws', '1.3.0'
+gem 'mini_magick'
 
-gem "paperclip", "~> 6.1"
+
+gem 'painless_manufacturing-accounting',
+  # path: "/Users/vic/projects/painless_manufacturing/painless_manufacturing-accounting"
+  git: "https://github.com/parablesoft/painless_manufacturing-accounting.git",
+  # # tag: "v0.1.5"
+  branch: "feature/vendor-sku"
+
+gem 'stardust_rails-kpis',
+  git: "https://github.com/parablesoft/stardust_rails-kpis.git",
+  # tag: "v0.0.2"
+  ref: "e6d171f23e8ca679e63625881fd6bdb4b699ebc1"
+# branch: "master"
+# path: "/Users/vic/projects/stardust/stardust_rails-kpis"
